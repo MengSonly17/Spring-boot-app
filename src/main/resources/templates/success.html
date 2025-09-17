@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en"
+	xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org">
+
+<head th:replace="~{base :: head-section}"></head>
+
+<body>
+    <!-- Navbar Start -->
+    <div th:replace="~{base :: navbar(success='active')}"></div>
+    <!-- Navbar End -->
+ 
+    <!-- Page Header Start -->
+    <div th:replace="~{base :: header(text='Success')}"></div>
+    <!-- Page Header End -->
+    
+    <!-- invoice start -->
+    <div class="invoice-card">
+	    <!-- Header -->
+	    <div class="invoice-header">
+	      <h1 class="text-success">Invoice</h1>
+	      <div class="logo">Aperture Coffee</div>
+	    </div>
+	
+	    <hr>
+	
+	    <!-- Customer & Booking Info -->
+	    <div class="row mb-4">
+	      <div class="col-md-6">
+	        <h5>Customer Details</h5>
+	        <p>Name: <span th:text="${booked.name}">John Doe</span></p>
+	        <p>Phone: <span th:text="${booked.phoneNumber}">+855 10 947 790</span></p>
+	        <p>Email: <span th:text="${booked.email}">email@example.com</span></p>
+	      </div>
+	      <div class="col-md-6 text-md-end">
+	        <h5>Booking Details</h5>
+	        <p>Booking ID: <span th:text="${booked.id}">123</span></p>
+	        <p>Date: <span th:text="${booked.date}">2025-09-17</span></p>
+	        <p>Time: <span th:text="${booked.time}">15:00</span></p>
+	        <p>Persons: <span th:text="${booked.person}">2</span></p>
+	      </div>
+	    </div>
+	
+	    <!-- Itemized Table (if you want to show ordered items or fees) -->
+	    <table class="table table-bordered mb-4">
+	      <thead>
+	        <tr>
+	          <th>#</th>
+	          <th>Item</th>
+	          <th>Quantity</th>
+	          <th>Price</th>
+	          <th>Subtotal</th>
+	        </tr>
+	      </thead>
+	      <tbody>
+	        <tr>
+	          <td>1</td>
+	          <td>Table Reservation</td>
+	          <td  >1</td>
+	          <td>$15.00</td>
+	          <td th:text="${1 * 15}">$15.00</td>
+	        </tr>
+	        <!-- Add more rows for coffee, snacks, etc. if needed -->
+	      </tbody>
+	      <tfoot>
+	        <tr class="total-row">
+	          <th colspan="4" class="text-end">Total</th>
+	          <th th:text="${1 * 15}">$15.00</th>
+	        </tr>
+	      </tfoot>
+	    </table>
+	
+	    <!-- Footer -->
+	    <div class="text-center">
+	      <p class="mb-1">Thank you for your reservation!</p>
+	      <p>Coffee Shop | 123 Coffee Street, Phnom Penh, Cambodia</p>
+	      <button onclick="window.print()" class="btn btn-success rounded mt-3">Print Invoice</button>
+	    </div>
+	  </div>
+    <!-- invoice end -->
+
+    <!-- Footer Start -->
+	<div th:replace="~{base :: footer}"></div>
+    <!-- Footer End -->
+
+
+    <!-- back to top -->
+	<div th:replace="~{base :: script}"></div>
+</body>
+
+</html>

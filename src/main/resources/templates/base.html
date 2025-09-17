@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en"
+	xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org">
+
+<head th:fragment="head-section">
+    <meta charset="utf-8">
+    <title>Aperture Coffee</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+     
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+    <link th:href="@{/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css}" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/style.min.css" rel="stylesheet">
+    <style>
+	    .coffee-navbar {
+	        background-color: #2b1d0e; /* Dark coffee color */
+	    }
+	
+	    .brand-title {
+	        font-family: 'Georgia', serif;
+	        font-weight: 700;
+	        color: #d4a373; /* Gold accent */
+	        letter-spacing: 2px;
+	    }
+	
+	    .navbar-nav .nav-link {
+	        font-size: 16px;
+	        font-weight: 500;
+	        text-transform: uppercase;
+	        color: #f5f5f5 !important;
+	        margin-left: 20px;
+	        transition: all 0.3s ease;
+	    }
+	
+	    .navbar-nav .nav-link:hover,
+	    .navbar-nav .nav-link.active {
+	        color: #d4a373 !important;
+	    }
+	
+	    .dropdown-menu {
+	        background: #fff;
+	        border: none;
+	        padding: 10px 0;
+	    }
+	
+	    .dropdown-item {
+	        font-size: 15px;
+	        font-weight: 500;
+	        color: #2b1d0e !important;
+	        transition: all 0.3s ease;
+	    }
+	
+	    .dropdown-item:hover {
+	        background: #d4a373;
+	        color: #fff !important;
+	    }
+	</style>
+	<style>
+    /* Background overlay with dark + coffee gradient */
+    .page-header {
+        background: linear-gradient(rgba(43, 29, 14, 0.8), rgba(43, 29, 14, 0.8)),
+                    url('/img/coffee-bg.jpg') center center/cover no-repeat;
+        height: 400px;
+    }
+
+    .header-section {
+        min-height: 400px;
+        padding-top: 100px;
+        text-align: center;
+    }
+
+    .page-title {
+        font-family: 'Georgia', serif;
+        letter-spacing: 2px;
+        color: #f5f5f5;
+        margin-bottom: 15px;
+    }
+
+    .breadcrumb-custom p {
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .breadcrumb-custom a {
+        color: #d4a373;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .breadcrumb-custom a:hover {
+        color: #fff;
+    }
+
+    .text-gold {
+        color: #d4a373 !important;
+    }
+</style>
+	<style>
+    
+    .service-header {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://source.unsplash.com/1600x600/?coffee,beans') no-repeat center center/cover;
+      color: white;
+      text-align: center;
+      padding: 100px 20px;
+    }
+    .service-header h1 {
+      font-size: 3rem;
+      font-weight: bold;
+    }
+    .card {
+    	height:400px;
+    }
+    .service-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor:pointer;
+      
+      img {
+      	height:250px;
+      }
+    }
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15); 
+    }
+  </style>
+	<style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .about-header {
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0,0,0,0.6)), url('https://source.unsplash.com/1600x600/?coffee,shop') no-repeat center center/cover;
+      color: white;
+      text-align: center;
+      padding: 100px 20px;
+    }
+    .about-header h1 {
+      font-size: 3rem;
+      font-weight: bold;
+    }
+    .team-img {
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      margin-bottom: 15px;
+    }
+  </style>
+	<style>
+     
+     .menu-header {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                  url('https://source.unsplash.com/1600x600/?coffee,beans') no-repeat center center/cover;
+      color: white;
+      text-align: center;
+      padding: 120px 20px;
+    }
+    .menu-header h1 {
+      font-size: 3.2rem;
+      font-weight: bold;
+    }
+    .menu-category {
+      margin-bottom: 80px;
+    }
+    .menu-card {
+      border: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+       border-radius: .75rem;
+       overflow:hidden;
+    }
+    .menu-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    .menu-card img {
+      height: 200px;
+      width:100%;
+      object-fit: cover;
+      border-top-left-radius: .75rem;
+      border-top-right-radius: .75rem;
+    }
+    .price {
+      font-weight: bold;
+      color: #6c4c3c;
+      font-size: 1.1rem;
+    }
+  </style>
+	<style>
+		.contact-header {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                  url('https://source.unsplash.com/1600x600/?coffee,shop') no-repeat center center/cover;
+      color: white;
+      text-align: center;
+      padding: 120px 20px;
+    }
+    .contact-header h1 {
+      font-size: 3rem;
+      font-weight: bold;
+    }
+    .info-box {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .info-box:hover {
+      transform: translateY(-5px);
+    }
+    .info-box i {
+      font-size: 2rem;
+      color: #6c4c3c;
+      margin-bottom: 10px;
+    }
+  </style>
+	</style>
+	<style>
+    
+    .invoice-card {
+      max-width: 800px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+    .invoice-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    .invoice-header h1 { 
+      font-weight: bold;
+    }
+    .invoice-header .logo {
+      font-size: 1.2rem;
+      font-weight: bold; 
+    }
+    .table th {
+      background: rgb(128, 255, 128);
+      font-weight: 600;
+    }
+    .total-row {
+      font-weight: bold;
+      font-size: 1.1rem;
+      background: rgb(128, 255, 128);
+    }
+    @media print {
+      body {
+        background: #fff;
+      }
+      .invoice-card {
+        box-shadow: none;
+        margin: 0;
+        border-radius: 0;
+      }
+    }
+  </style>
+
+</head>
+<body>
+	<!-- Navbar Start -->
+    <div class="container-fluid p-0 px-5 pt-4 pb-5 nav-bar" 
+	     th:fragment="navbar"
+	     th:with="
+	        home=${home}?:'',
+	        about=${about}?:'',
+	        service=${service}?:'',
+	        menu=${menu}?:'',
+	        reservation=${reservation}?:'',
+	        testimonial=${testimonial}?:'',
+	        contact=${contact}?:'',
+	        success=${success}?:''
+	     ">
+	    <nav class="navbar navbar-expand-lg navbar-dark coffee-navbar py-3 px-4">
+	        <a th:href="@{/}" class="navbar-brand">
+	            <h3 class="m-0 text-uppercase brand-title">Aperture Coffee</h1>
+	        </a>
+	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+	            <span class="navbar-toggler-icon"></span>
+	        </button>
+	
+	        <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+	            <div class="navbar-nav">
+	                <a th:href="@{/}" class="nav-item nav-link" th:classappend="${home}">Home</a>
+	                <a th:href="@{/about}" class="nav-item nav-link" th:classappend="${about}">About</a>
+	                <a th:href="@{/service}" class="nav-item nav-link" th:classappend="${service}">Service</a>
+	                <a th:href="@{/menu}" class="nav-item nav-link" th:classappend="${menu}">Menu</a>
+	                
+	                <div class="nav-item dropdown">
+	                    <a href="#" class="nav-link dropdown-toggle"
+	                       th:classappend="${reservation != ''} ? ' active' : (${testimonial != ''} ? ' active' : '')"
+	                       data-toggle="dropdown">
+	                        Pages
+	                    </a>
+	                    <div class="dropdown-menu shadow-lg rounded-2">
+	                        <a th:href="@{/reservation}" class="dropdown-item" th:classappend="${reservation}">Reservation</a>
+	                        <a th:href="@{/testimonial}" class="dropdown-item" th:classappend="${testimonial}">Testimonial</a>
+	                    </div>
+	                </div>
+	                
+	                <a th:href="@{/contact}" class="nav-item nav-link" th:classappend="${contact}">Contact</a>
+	            </div>
+	        </div>
+	    </nav>
+	</div>
+    <!-- Navbar End -->
+    
+    <!-- Page Header Start -->
+    <div th:fragment="header" th:with="text=${text}"
+	     class="container-fluid page-header mb-5 position-relative overlay-bottom" style="height:450px;">
+	    <div class="d-flex flex-column align-items-center justify-content-center header-section">
+	        <h1 class="display-5 text-uppercase text-white fw-bold page-title" th:text="${text}"></h1>
+	        <div class="breadcrumb-custom d-inline-flex">
+	            <p class="m-0"><a class="text-gold" href="/">Home</a></p>
+	            <p class="m-0 px-2 text-white">/</p>
+	            <p class="m-0 text-white" th:text="${text}"></p>
+	        </div>
+	    </div>
+	</div>
+    <!-- Page Header End -->
+    
+    <!-- Reservation Start -->
+    <div th:fragment="reservation-section" class="container-fluid py-5">
+		 <div class="container my-5">
+			  <div class="reservation rounded-4 overflow-hidden shadow-lg">
+				    <div class="row g-0">
+				      
+				      <!-- Left Panel: Promotion -->
+				      <div class="col-lg-6 d-flex flex-column justify-content-center p-5" style="background: linear-gradient(135deg, #f6d365, #fda085);">
+				        <div class="text-center text-lg-start">
+				          <h1 class="display-4 fw-bold text-white mb-2">30% OFF</h1>
+				          <h3 class="text-white mb-4">Online Reservation</h3>
+				          <p class="text-white-75 mb-4">Reserve your table online and enjoy our special discount! Perfect for coffee dates, group study sessions, or relaxing with friends.</p>
+				          
+				          <ul class="list-unstyled text-white">
+				            <li class="mb-2"><i class="fa fa-check-circle me-2"></i>Freshly brewed premium coffee</li>
+				            <li class="mb-2"><i class="fa fa-check-circle me-2"></i>Cozy & stylish atmosphere</li>
+				            <li class="mb-2"><i class="fa fa-check-circle me-2"></i>Friendly, fast service</li>
+				          </ul>
+				        </div>
+				      </div>
+				
+				      <!-- Right Panel: Reservation Form -->
+				      <div class="col-lg-6" style="background: #fff;">
+				        <div class="p-5 h-100 d-flex align-items-center justify-content-center">
+				          <div class="w-100" style="max-width: 420px;">
+				            <h2 class="fw-bold mb-4 text-center text-dark">Book Your Table</h2>
+				            
+				            <form th:object="${booked}" th:action="@{/success}" th:method="post">
+				              
+				              <!-- Name -->
+				              <div class="mb-3">
+				                <input th:field="*{name}" type="text" class="form-control rounded shadow-sm p-3" placeholder="Your Name" required />
+				              </div>
+				
+				              <!-- Phone -->
+				              <div class="mb-3">
+				                <input th:field="*{phoneNumber}" type="text" class="form-control rounded shadow-sm p-3" placeholder="Phone Number" required />
+				              </div>
+				
+				              <!-- Email -->
+				              <div class="mb-3">
+				                <input th:field="*{email}" type="email" class="form-control rounded shadow-sm p-3" placeholder="Email" required />
+				              </div>
+				
+				              <!-- Date -->
+				              <div class="mb-3">
+								  <input th:field="*{date}" type="date" class="form-control rounded  shadow-sm p-3" placeholder="Select Date" required />
+								</div>
+				
+				              <!-- Time -->
+				              <div class="mb-3">
+								  <input th:field="*{time}" type="time" class="form-control rounded  shadow-sm p-3" placeholder="Select Time" required />
+								</div>
+				
+				              <!-- Person -->
+				              <div class="mb-4">
+				                <select th:field="*{person}" class="form-select rounded w-100 shadow-sm px-4 py-2">
+				                  <option selected value="0">Select Person</option>
+				                  <option value="1">1 Person</option>
+				                  <option value="2">2 Persons</option>
+				                  <option value="3">3 Persons</option>
+				                  <option value="4">4 Persons</option>
+				                </select>
+				              </div>
+				
+				              <!-- Submit Button -->
+				              <button type="submit" class="btn btn-warning w-100 fw-bold py-3 rounded shadow-lg">
+				                Reserve Now
+				              </button>
+				            </form>
+				          </div>
+				        </div>
+				      </div>
+				
+				    </div>
+			  </div>
+		</div>
+	</div>
+
+    <!-- Reservation End -->
+    
+    <!-- Testimonial Start -->
+    <div th:fragment="testimonial-section" class="container-fluid py-5">
+        <!-- Testimonial Section -->
+		<section class="py-5 bg-light">
+		  <div class="container text-center">
+		    <h2 class="fw-bold mb-4">☕ What Our Customers Say</h2>
+		    <p class="text-muted mb-5">Our coffee isn’t just a drink—it’s an experience. Hear from our happy customers!</p>
+		
+		    <div class="row g-4">
+		      <!-- Testimonial 1 -->
+		      <div class="col-md-4">
+		        <div class="card border-0 shadow-sm h-100">
+		          <div class="card-body">
+		            <p class="text-muted fst-italic">
+		              “The best coffee shop in Phnom Penh! The latte art is always perfect and the atmosphere is so cozy.”
+		            </p>
+		            <hr>
+		            <div class="d-flex align-items-center justify-content-center">
+		              <img src="/img/1426426_1414382115557879_9146120132893778981_n.jpg" 
+		                   alt="Customer" class="rounded-circle me-3" width="50" height="50"    
+		               >
+		              <div class="text-start">
+		                <h6 class="fw-bold mb-0">Sophea Chhun</h6>
+		                <small class="text-muted">Regular Customer</small>
+		              </div>
+		            </div>
+		          </div>
+		        </div>
+		      </div>
+		
+		      <!-- Testimonial 2 -->
+		      <div class="col-md-4">
+		        <div class="card border-0 shadow-sm h-100">
+		          <div class="card-body">
+		            <p class="text-muted fst-italic">
+		              “Amazing service and delicious espresso! I love the Buy 1 Get 1 deal in the afternoon Highly recommend this place!”
+		            </p>
+		            <hr>
+		            <div class="d-flex align-items-center justify-content-center">
+		              <img src="/img/11825571_1445228205806603_4311377493557144010_n.jpg" 
+		                   alt="Customer" class="rounded-circle me-3" width="50" height="50">
+		              <div class="text-start">
+		                <h6 class="fw-bold mb-0">Vannak Sok</h6>
+		                <small class="text-muted">Coffee Lover</small>
+		              </div>
+		            </div>
+		          </div>
+		        </div>
+		      </div>
+		
+		      <!-- Testimonial 3 -->
+		      <div class="col-md-4">
+		        <div class="card border-0 shadow-sm h-100">
+		          <div class="card-body">
+		            <p class="text-muted fst-italic">
+		              “Their cappuccino and free weekend croissant deal is my absolute favorite. Highly recommend this place!”
+		            </p>
+		            <hr>
+		            <div class="d-flex align-items-center justify-content-center">
+		              <img src="/img/mengsonly.jpeg" 
+		                   alt="Customer" class="rounded-circle me-3" width="50" height="50">
+		              <div class="text-start ">
+		                <h6 class="fw-bold mb-0">Dary Kim</h6>
+		                <small class="text-muted">Food Blogger</small>
+		              </div>
+		            </div>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		</section>
+    </div>
+    <!-- Testimonial End -->
+    
+    <!-- Footer Start --> 
+       <footer th:fragment="footer" style="background-color: #2b1d0e;" class="text-light pt-5 pb-3">
+		  <div class="container">
+		    <div class="row">
+		      <!-- About -->
+		      <div class="col-md-4 mb-4">
+		        <h5 class="fw-bold text-white">About Us</h5>
+		        <p class="text-muted">
+		          We are passionate about serving great coffee and creating a cozy space
+		          for our community to connect and relax.
+		        </p>
+		      </div>
+		
+		      <!-- Quick Links -->
+		      <div class="col-md-4 mb-4">
+		        <h5 class="fw-bold text-white">Quick Links</h5>
+		        <ul class="list-unstyled">
+		          <li><a th:href="@{/}" class="text-muted text-decoration-none">Home</a></li>
+		          <li><a th:href="@{/about}" class="text-muted text-decoration-none">About</a></li>
+		          <li><a th:href="@{/menu}" class="text-muted text-decoration-none">Menu</a></li>
+		          <li><a th:href="@{/contact}" class="text-muted text-decoration-none">Contact</a></li>
+		        </ul>
+		      </div>
+		
+		      <!-- Contact & Social -->
+		      <div class="col-md-4 mb-4">
+		        <h5 class="fw-bold text-white">Contact</h5>
+		        <p class="text-muted mb-1"><i class="bi bi-geo-alt-fill me-2"></i>123 Coffee St, Phnom Penh</p>
+		        <p class="text-muted mb-1"><i class="bi bi-telephone-fill me-2"></i>+855 10 947 790</p>
+		        <p class="text-muted mb-3"><i class="bi bi-envelope-fill me-2"></i>mengsonly5555@gmail.com</p>
+		
+		        <div>
+		          <a href="#" class="text-light me-3"><i class="bi bi-facebook"></i></a>
+		          <a href="#" class="text-light me-3"><i class="bi bi-instagram"></i></a>
+		          <a href="#" class="text-light me-3"><i class="bi bi-twitter"></i></a>
+		          <a href="#" class="text-light"><i class="bi bi-linkedin"></i></a>
+		        </div>
+		      </div>
+		    </div>
+		
+		    <hr class="border-white">
+		
+		    <div class="text-center">
+		      <p class="mb-0">&copy; 2025 Aperture Coffee. All rights reserved.</p>
+		    </div>
+		  </div>
+		</footer> 
+    <!-- Footer End -->
+    
+    <!-- About Start -->
+    <div th:fragment="about-section" class="container-fluid py-5">
+        <div class="container"> 
+			
+			  <!-- About Section -->
+			  <section class="container my-5">
+			    <div class="row align-items-center">
+			      <div class="col-md-6">
+			        <img src="img/mengsonly.jpeg" class="img-fluid rounded shadow" style="width:500px;height:550px;object-fit:cover;" alt="About Image">
+			      </div>
+			      <div class="col-md-6">
+			        <h2 class="fw-bold">Who We Are</h2>
+			        <p class="text-muted">
+			          We are a passionate team dedicated to serving the best coffee and creating unforgettable experiences. 
+			          Our journey started with a simple idea: to bring people together through flavors, smiles, and stories. 
+			          Today, we continue to innovate while staying true to our roots.
+			        </p>
+			        <p class="text-muted">
+			          From sourcing the finest beans to crafting delicious blends, our mission is to spread warmth and joy in every cup.
+			        </p>
+			      </div>
+			    </div>
+			  </section>
+			
+			  <!-- Mission Section -->
+			  <section class="bg-light py-5">
+			    <div class="container text-center">
+			      <h2 class="fw-bold mb-4">Our Mission</h2>
+			      <p class="text-muted mx-auto" style="max-width: 700px;">
+			        To inspire and nurture the human spirit – one person, one cup, and one neighborhood at a time.
+			        We believe in community, sustainability, and creating moments of connection that last a lifetime.
+			      </p>
+			    </div>
+			  </section>
+			
+			  <!-- Team Section -->
+			  <section class="container py-5">
+			    <h2 class="fw-bold text-center mb-5">Meet Our Team</h2>
+			    <div class="row text-center">
+			      <div class="col-md-4">
+			        <img src="img/mengsonly.jpeg" class="team-img shadow" alt="Team Member">
+			        <h5 class="fw-bold">Meng Sonly</h5>
+			        <p class="text-muted">Founder & CEO</p>
+			      </div>
+			      <div class="col-md-4">
+			        <img src="img/mengsonly.jpeg" class="team-img shadow" alt="Team Member">
+			        <h5 class="fw-bold">Meng Elong</h5>
+			        <p class="text-muted">Head Barista</p>
+			      </div>
+			      <div class="col-md-4">
+			        <img src="img/mengsonly.jpeg" class="team-img shadow" alt="Team Member">
+			        <h5 class="fw-bold">Meng Seakheng</h5>
+			        <p class="text-muted">Pastry Chef</p>
+			      </div>
+			    </div>
+			  </section>
+        </div>
+    </div>
+    <!-- About End -->
+    
+    <!-- discount start -->
+    <div th:fragment="discount-section">
+    	<section class="py-5 bg-light">
+		  <div class="container text-center">
+		    <h2 class="fw-bold mb-4">🎉 Special Offers</h2>
+		    <p class="text-muted mb-5">Enjoy our limited-time deals and save big on your favorite coffee and treats!</p>
+		    
+		    <div class="row g-4">
+		      <!-- Discount Card 1 -->
+		      <div class="col-md-4">
+		        <div class="card border-0 shadow-sm h-100">
+		          <div class="card-body">
+		            <h3 class="fw-bold text-warning">20% OFF</h3>
+		            <p class="fw-bold">All Lattes</p>
+		            <p class="text-muted">Every Monday – recharge your week with a latte at 20% off.</p>
+		            <button class="btn btn-outline-dark btn-sm">Order Now</button>
+		          </div>
+		        </div>
+		      </div>
+		
+		      <!-- Discount Card 2 -->
+		      <div class="col-md-4">
+		        <div class="card border-0 shadow-sm h-100">
+		          <div class="card-body">
+		            <h3 class="fw-bold text-danger">Buy 1 Get 1</h3>
+		            <p class="fw-bold">Espresso & Americano</p>
+		            <p class="text-muted">Valid from 2 PM – 5 PM daily. Bring a friend and enjoy together!</p>
+		            <button class="btn btn-outline-dark btn-sm">Grab Offer</button>
+		          </div>
+		        </div>
+		      </div>
+		
+		      <!-- Discount Card 3 -->
+		      <div class="col-md-4">
+		        <div class="card border-0 shadow-sm h-100">
+		          <div class="card-body">
+		            <h3 class="fw-bold text-success">Free Pastry</h3>
+		            <p class="fw-bold">With Any Large Coffee</p>
+		            <p class="text-muted">Exclusive weekend offer – get a free croissant with your order.</p>
+		            <button class="btn btn-outline-dark btn-sm">Claim Now</button>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		</section>
+    </div>
+    <!-- discount end  -->
+    
+    <!-- Service Start -->
+    <div th:fragment="service-section" class="container-fluid pt-5">
+		<!-- Services Section -->
+		  <section class="container py-5">
+		    <div class="row text-center mb-4">
+		      <h2 class="fw-bold">What We Offer</h2> 
+		    </div>
+		    <div class="row g-4">
+		      <!-- Service 1 -->
+		      <div class="col-md-4 mb-4 mb-4">
+		        <div class="card service-card   border-0 shadow-sm">
+		          <img src="/img/vecteezy_a-freshly-baked-croissant-and-a-cup-of-latte-with-coffee_51891570.jpeg" class="card-img-top" alt="Specialty Coffee">
+		          <div class="card-body">
+		            <h5 class="card-title fw-bold">Specialty Coffee</h5>
+		            <p class="card-text text-muted">Handcrafted espresso, lattes, and cold brews made from freshly roasted beans to satisfy every coffee lover.</p>
+		          </div>
+		        </div>
+		      </div>
+		
+		      <!-- Service 2 -->
+		      <div class="col-md-4 mb-4">
+		        <div class="card service-card   border-0 shadow-sm">
+		          <img src="/img/item-642f5b5885a38.jpg" class="card-img-top" alt="Fresh Pastries">
+		          <div class="card-body">
+		            <h5 class="card-title fw-bold">Fresh Pastries</h5>
+		            <p class="card-text text-muted">A delicious range of cakes, croissants, and desserts baked fresh daily to pair with your coffee.</p>
+		          </div>
+		        </div>
+		      </div>
+		
+		      <!-- Service 3 -->
+		      <div class="col-md-4 mb-4">
+		        <div class="card service-card  border-0 shadow-sm">
+		          <img src="/img/photo-1525610553991-2bede1a236e2.jpg" class="card-img-top" alt="Cozy Cafe">
+		          <div class="card-body">
+		            <h5 class="card-title fw-bold">Cozy Café Experience</h5>
+		            <p class="card-text text-muted">Relax in a warm, inviting space perfect for work, study, or catching up with friends.</p>
+		          </div>
+		        </div>
+		      </div>
+		
+		      <!-- Service 4 -->
+		      <div class="col-md-4">
+		        <div class="card service-card   border-0 shadow-sm">
+		          <img src="img/MS Coffee Cups.png" class="card-img-top" alt="Takeaway">
+		          <div class="card-body">
+		            <h5 class="card-title fw-bold">Takeaway & Delivery</h5>
+		            <p class="card-text text-muted">Enjoy our coffee and pastries on the go with fast takeaway and reliable delivery options.</p>
+		          </div>
+		        </div>
+		      </div>
+		
+		      <!-- Service 5 -->
+		      <div class="col-md-4 mb-4">
+		        <div class="card service-card   border-0 shadow-sm">
+		          <img src="/img/latte_specialty_coffee_SCA.webp" class="card-img-top" alt="Catering Service">
+		          <div class="card-body">
+		            <h5 class="card-title fw-bold">Catering Services</h5>
+		            <p class="card-text text-muted">Let us bring the coffee shop experience to your events with our catering and custom packages.</p>
+		          </div>
+		        </div>
+		      </div>
+		
+		      <!-- Service 6 -->
+		      <div class="col-md-4 mb-4">
+		        <div class="card service-card   border-0 shadow-sm">
+		          <img src="/img/Barista-Training-1.webp" class="card-img-top" alt="Barista Training">
+		          <div class="card-body">
+		            <h5 class="card-title fw-bold">Barista Training</h5>
+		            <p class="card-text text-muted">Join our workshops and learn the art of brewing coffee like a professional barista.</p>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+		  </section>
+    </div>
+    <!-- Service End -->
+    
+    <!-- contact start -->
+    <div th:fragment="contact-section">
+    	<!-- Contact Info -->
+		  <section class="container py-5">
+		    <div class="row g-4 text-center">
+		      <div class="col-md-4">
+		        <div class="info-box">
+		          <i class="bi bi-geo-alt-fill"></i>
+		          <h5 class="fw-bold">Visit Us</h5>
+		          <p class="text-muted">123 Coffee Street, Phnom Penh, Cambodia</p>
+		        </div>
+		      </div>
+		      <div class="col-md-4">
+		        <div class="info-box">
+		          <i class="bi bi-telephone-fill"></i>
+		          <h5 class="fw-bold">Call Us</h5>
+		          <p class="text-muted">+855 10 947 790</p>
+		        </div>
+		      </div>
+		      <div class="col-md-4">
+		        <div class="info-box">
+		          <i class="bi bi-envelope-fill"></i>
+		          <h5 class="fw-bold">Email Us</h5>
+		          <p class="text-muted">mengsonly5555@gmail.com</p>
+		        </div>
+		      </div>
+		    </div>
+		  </section>
+		
+		  <!-- Contact Form & Map -->
+		  <section class="container py-5">
+		    <div class="row g-4">
+		      <!-- Contact Form -->
+		      <div class="col-md-6">
+		        <h3 class="fw-bold mb-4">Send Us a Message</h3>
+		        <form>
+		          <div class="mb-3">
+		            <input type="text" class="form-control" placeholder="Your Name" required>
+		          </div>
+		          <div class="mb-3">
+		            <input type="email" class="form-control" placeholder="Your Email" required>
+		          </div>
+		          <div class="mb-3">
+		            <input type="text" class="form-control" placeholder="Subject" required>
+		          </div>
+		          <div class="mb-3">
+		            <textarea class="form-control" rows="5" placeholder="Message" required></textarea>
+		          </div>
+		          <button type="submit" class="btn btn-dark">Send Message</button>
+		        </form>
+		      </div>
+		
+		      <!-- Google Map -->
+		      <div class="col-md-6">
+		        <h3 class="fw-bold mb-4">Find Us</h3>
+		        
+		        <iframe 
+		          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15635.040166510078!2d104.89609062665254!3d11.569052279617738!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31095173761d4a53%3A0xcd09ff2f4d326e3f!2sSETEC%20Institute!5e0!3m2!1sen!2skh!4v1758097343846!5m2!1sen!2skh" 
+		          width="100%" 
+		          height="350" 
+		          style="border:0;" 
+		          allowfullscreen="" 
+		          loading="lazy">
+		        </iframe>
+		      </div>
+		    </div>
+		  </section>
+    </div>
+    <!-- contact end -->
+    
+    <!-- start of menu section -->
+    <div th:fragment="menu-section" class="container-fluid pt-5">
+         <section class="container py-5">
+		    <!-- Coffee -->
+		    <div class="menu-category">
+		      <h2 class="fw-bold mb-4 text-center"><i class="bi bi-cup-hot-fill text-warning me-2"></i>Coffee</h2>
+		      <div class="row g-4">
+		        <div class="col-md-3">
+		          <div class="  menu-card shadow-sm">
+		            <img src="/img/ec178d83e5f597b162cda1e60cb64194.jpg" alt="Espresso">
+		            <div class="card-body text-center"  >
+		              <h5 class="fw-bold">Espresso</h5>
+		              <p class="price">$2.50</p>
+		            </div>
+		          </div>
+		        </div>
+		        <div class="col-md-3">
+		          <div class="  menu-card shadow-sm">
+		            <img src="/img/americano.avif" alt="Americano">
+		            <div class="card-body text-center">
+		              <h5 class="fw-bold">Americano</h5>
+		              <p class="price">$3.00</p>
+		            </div>
+		          </div>
+		        </div>
+		        <div class="col-md-3">
+		          <div class="  menu-card shadow-sm">
+		            <img src="/img/Smores-Iced-Latte-Recipe-7.jpg" alt="Latte">
+		            <div class="card-body text-center">
+		              <h5 class="fw-bold">Latte</h5>
+		              <p class="price">$4.00</p>
+		            </div>
+		          </div>
+		        </div>
+		        <div class="col-md-3">
+		          <div class="  menu-card shadow-sm">
+		            <img src="/img/p88-2.webp" alt="Cappuccino">
+		            <div class="card-body text-center">
+		              <h5 class="fw-bold">Cappuccino</h5>
+		              <p class="price">$3.50</p>
+		            </div>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+		
+		    <!-- Tea -->
+		    <div class="menu-category">
+		      <h2 class="fw-bold mb-4 text-center"><i class="bi bi-cup-fill text-success me-2"></i>Tea</h2>
+		      <div class="row g-4">
+		        <div class="col-md-3">
+		          <div class="  menu-card shadow-sm">
+		            <img src="/img/JoyJolt_Green_Tea.webp" alt="Green Tea">
+		            <div class="card-body text-center">
+		              <h5 class="fw-bold">Green Tea</h5>
+		              <p class="price">$2.50</p>
+		            </div>
+		          </div>
+		        </div>
+		        <div class="col-md-3">
+		          <div class="  menu-card shadow-sm">
+		            <img src="/img/blacktea.png" alt="Black Tea">
+		            <div class="card-body text-center">
+		              <h5 class="fw-bold">Black Tea</h5>
+		              <p class="price">$2.50</p>
+		            </div>
+		          </div>
+		        </div>
+		        <div class="col-md-3">
+		          <div class="  menu-card shadow-sm">
+		            <img src="/img/Chai-latte-recette-facile-Lilie-Bakery-500x500.webp" alt="Chai Latte">
+		            <div class="card-body text-center">
+		              <h5 class="fw-bold">Chai Latte</h5>
+		              <p class="price">$3.50</p>
+		            </div>
+		          </div>
+		        </div>
+		        <div class="col-md-3">
+		          <div class="  menu-card shadow-sm">
+		            <img src="/img/4x6_-13_520x500_152f3cc6-eec3-4d80-918e-ab5ab2ca04b8.webp" alt="Herbal Tea">
+		            <div class="card-body text-center">
+		              <h5 class="fw-bold">Herbal Tea</h5>
+		              <p class="price">$3.00</p>
+		            </div>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+		
+		    <!-- Pastries -->
+		    <div class="menu-category">
+		      <h2 class="fw-bold mb-4 text-center"><i class="bi bi-cake-fill text-danger me-2"></i>Pastries & Desserts</h2>
+		      <div class="row g-4">
+		        <div class="col-md-3">
+		          <div class="  menu-card shadow-sm">
+		            <img src="/img/Croissants-article.png" alt="Croissant">
+		            <div class="card-body text-center">
+		              <h5 class="fw-bold">Croissant</h5>
+		              <p class="price">$2.00</p>
+		            </div>
+		          </div>
+		        </div>
+		        <div class="col-md-3">
+		          <div class="  menu-card shadow-sm">
+		            <img src="/img/bakery-style-blueberry-muffins-featured-2.jpg" alt="Muffin">
+		            <div class="card-body text-center">
+		              <h5 class="fw-bold">Blueberry Muffin</h5>
+		              <p class="price">$2.50</p>
+		            </div>
+		          </div>
+		        </div>
+		        <div class="col-md-3">
+		          <div class="  menu-card shadow-sm">
+		            <img src="/img/ChocolateCake.webp" alt="Chocolate Cake">
+		            <div class="card-body text-center">
+		              <h5 class="fw-bold">Chocolate Cake</h5>
+		              <p class="price">$3.50</p>
+		            </div>
+		          </div>
+		        </div>
+		        <div class="col-md-3">
+		          <div class="  menu-card shadow-sm">
+		            <img src="/img/Cheesecake.jpg" alt="Cheesecake">
+		            <div class="card-body text-center">
+		              <h5 class="fw-bold">Cheesecake</h5>
+		              <p class="price">$4.00</p>
+		            </div>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+		  </section>
+    </div>
+    <!-- end of menu section -->
+    
+    <!-- back to top start -->
+    <div th:fragment="script" th:remove="tag">
+	    <!-- Back to Top -->
+	    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+	
+	
+	    <!-- JavaScript Libraries -->
+	    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+	    <script th:src="@{/lib/easing/easing.min.js}"></script>
+	    <script th:src="@{/lib/waypoints/waypoints.min.js}"></script>
+	    <script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
+	    <script th:src="@{/lib/tempusdominus/js/moment.min.js}"></script>
+	    <script th:src="@{/lib/tempusdominus/js/moment-timezone.min.js}"></script>
+	    <script th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}"></script>
+	
+	    <!-- Contact Javascript File -->
+	    <script th:src="@{/mail/jqBootstrapValidation.min.js}"></script>
+	    <script th:src="@{/mail/contact.js}"></script>
+	
+	    <!-- Template Javascript -->
+	    <script th:src="@{/js/main.js}"></script>
+    </div>
+    <!-- back to top end -->
+    
+</body>
+</html>
