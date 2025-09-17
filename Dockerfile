@@ -1,14 +1,15 @@
-# Use OpenJDK 21 base image
+# Use OpenJDK 21
 FROM eclipse-temurin:21-jdk-jammy
 
-# Set the working directory
+# Set working directory
 WORKDIR /app
 
-# Copy Maven/Gradle build jar into the container
-COPY target/*.jar app.jar
+# Copy the JAR file into the container
+COPY build/libs/CoffeeShopTelegram-0.0.1-SNAPSHOT.jar app.jar
 
-# Expose the port Spring Boot will run on
+# Expose port (Render uses $PORT)
 EXPOSE 8080
 
-# Command to run the jar
-ENTRYPOINT ["java","-jar","app.jar"]
+# Set the entrypoint to run the JAR
+ENTRYPOINT ["java", "-jar", "app.jar"]
+
