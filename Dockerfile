@@ -1,5 +1,14 @@
-FROM openjdk:21-jdk-slim
+# Use OpenJDK 21 base image
+FROM eclipse-temurin:21-jdk-jammy
+
+# Set the working directory
 WORKDIR /app
-COPY build/libs/*.jar app.jar
+
+# Copy Maven/Gradle build jar into the container
+COPY target/*.jar app.jar
+
+# Expose the port Spring Boot will run on
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/app/app.jar"]
+
+# Command to run the jar
+ENTRYPOINT ["java","-jar","app.jar"]
